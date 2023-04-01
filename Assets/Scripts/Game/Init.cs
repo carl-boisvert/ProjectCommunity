@@ -19,7 +19,7 @@ public class Init : MonoBehaviour
         else
         {
             Debug.Log("Client Build");
-            Instantiate(_clientGo);
+            SceneManager.LoadSceneAsync("MainMenu");
         }
         
         Destroy(gameObject);
