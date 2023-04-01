@@ -1,16 +1,27 @@
-using Steamworks;
-using TMPro;
+using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class Init : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _gamertag;
+    
+    [SerializeField] private GameObject _serverGo;
+    [SerializeField] private GameObject _clientGo;
+    
     void Start() 
     {
-        if (SteamManager.Initialized)
+        if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null)
         {
-            string gamertag = SteamFriends.GetPersonaName();
-            _gamertag.text = gamertag;
+            Console.WriteLine("Server Build");
+            Instantiate(_serverGo);
         }
+        else
+        {
+            Debug.Log("Client Build");
+            Instantiate(_clientGo);
+        }
+        
+        Destroy(gameObject);
     }
 }
